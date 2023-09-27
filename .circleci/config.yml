@@ -6,7 +6,7 @@ orbs:
 workflows:
   testing-oidc:
     jobs:
-      - testing-oidc:
+      - testing-oidc
       
 jobs:
   testing-oidc:
