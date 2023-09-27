@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  onboarding-orb: logan/onboarding-orb@0.0.10
+
+workflows:
+  testing-oidc:
+    jobs:
+      - testing-oidc:
+      
+jobs:
+  testing-oidc:
+    executor: onboarding-orb/aws
+    steps:
+      - checkout
+
+
+
+
