@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  onboarding-orb: logan/onboarding-orb@0.0.10
+  onboarding-orb: logan/onboarding-orb@0.0.11
 
 workflows:
   testing-oidc:
