@@ -3,6 +3,14 @@ version: 2.1
 orbs:
   onboarding-orb: logan/onboarding-orb@0.0.11
 
+parameters:
+  account_id:
+    type: string
+    default: "397187125081"
+  image_name:
+    type: string
+    default: "cci_image_new"
+
 workflows:
   testing-oidc:
     jobs:
@@ -10,7 +18,10 @@ workflows:
       
 jobs:
   testing-oidc:
-    executor: onboarding-orb/aws
+    docker:
+      - image: 397187125081.dkr.ecr.us-east-1.amazonaws.com/testing
+        aws_auth:
+          oidc_role_arn: arn:aws:iam::<< parameters.account_id >>:role/<< parameters.image_name >>
     steps:
       - checkout
 
