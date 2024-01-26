@@ -8,7 +8,7 @@ workflows:
 jobs:
   testing-oidc:
     docker:
-      - image: cimg/base:current
+      - image: cubridci/cubridci:12.0
     steps:
       - checkout
 
