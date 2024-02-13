@@ -13,7 +13,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:14.0
+      - image: cimg/postgres:14.9
         environment:
           POSTGRES_USER: postgres
 
