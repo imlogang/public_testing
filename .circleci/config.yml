@@ -11,6 +11,7 @@ jobs:
       - image: cimg/python:3.10
         environment:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+          TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/postgres
 
     # Service container image
       - image: cimg/postgres:14.9
@@ -37,7 +38,11 @@ jobs:
       - run: |
           psql \
           -d $TEST_DATABASE_URL \
-          -c "DROP DATABASE to_be_dropped"          
+          -c "DROP DATABASE to_be_dropped"  
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL_POSTGRES \
+          -c "SELECT * FROM cron.job"  
 
 
 
