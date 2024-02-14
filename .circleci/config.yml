@@ -11,7 +11,7 @@ jobs:
       - image: cimg/python:3.10
         environment:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
-          TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/postgres
+          TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/test_db
 
     # Service container image
       - image: imlogang/postgres-no-pg-cron:latest
@@ -25,8 +25,15 @@ jobs:
       - run: whoami
       - run: |
           psql \
-          -d $TEST_DATABASE_URL \
-          -c "CREATE DATABASE test_db; \c test_db; DROP DATABASE test_db;"  
-
+          -d $YOUR_DATABASE_URL \
+          -c "CREATE DATABASE test_db;" \
+      - run: |
+          psql \
+          -d $YOUR_DATABASE_URL \
+          -c "DROPDATABASE test_db;" \
+      - run: | 
+          psql \
+          -d $TEST_DATABASE_URL_POSTGRES \
+          -c "CREATE DATABASE test_db;" \
 
 
