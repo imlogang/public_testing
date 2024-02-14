@@ -25,16 +25,19 @@ jobs:
       - run: |
           psql \
           -d $TEST_DATABASE_URL \
-          -c "SELECT * FROM cron.schedule;"
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
           -c "CREATE TABLE test (name char(25));"
       - run: |
           psql \
           -d $TEST_DATABASE_URL \
           -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
-
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE DATABASE to_be_dropped"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "DROP DATABASE to_be_dropped"          
 
 
 
