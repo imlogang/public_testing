@@ -15,7 +15,7 @@ jobs:
 
       #- image: cimg/postgres:14.9
       #- image: imlogang/postgres-no-pg-cron:latest
-      - image: cimg/postgres:14.8
+      - image: cimg/postgres:14.9
         environment:
           POSTGRES_USER: postgres
 
@@ -36,6 +36,11 @@ jobs:
       #     psql \
       #     -d $TEST_DATABASE_URL_POSTGRES \
       #     -c "CREATE DATABASE test_db;" \
+      - run:
+          name: Update text search
+          command: |
+            PGPASSWORD=password psql -h localhost -U user -d postgres -c "ALTER SYSTEM SET shared_preload_libraries = '';"
+            PGPASSWORD=password psql -h localhost -U user -d postgres -c "SELECT pg_reload_conf();"
       - run:
           name: Wait for PostgreSQL to start
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
