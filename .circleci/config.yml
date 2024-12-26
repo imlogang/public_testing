@@ -11,7 +11,3 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-
-
-
-
