@@ -3,14 +3,18 @@ version: 2.1
 workflows:
   testing-oidc:
     jobs:
-      - testing-oidc
+      - testing-oidc:
+          contexts:
+            - foo
       
 jobs:
   testing-oidc:
     docker:
-      - image: cubridci/cubridci:latest
+      - image: cimg/base:current
+    resource_class: logan/container-runner
     steps:
       - checkout
+      - run: echo $bar
 
 
 
