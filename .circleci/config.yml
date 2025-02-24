@@ -4,7 +4,7 @@ workflows:
   testing-oidc:
     jobs:
       - testing-oidc:
-          contexts:
+          context:
             - foo
       
 jobs:
