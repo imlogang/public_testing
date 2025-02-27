@@ -1,21 +1,27 @@
 version: 2.1
 
-workflows:
-  testing-oidc:
-    jobs:
-      - testing-oidc:
-          context:
-            - foo
-      
-jobs:
-  testing-oidc:
+executors:
+  base:
     docker:
-      - image: cimg/base:current
-    resource_class: logan/container-runner
+      - image: cimg/base:stable
+      - image: cimg/mysql:8.0
+
+parameters:
+  gradle_version:
+    type: string
+    default: "8.12"
+
+jobs:
+  job_b:
+    executor: base
     steps:
       - checkout
-      - run: echo $bar
+      - setup_remote_docker
+      - run: docker container ls 
+      - run: docker network ls
+      - run: docker exec localhost:3306 ls /
 
-
-
-
+workflows:
+  workflow-a:
+    jobs:
+      - job_b
