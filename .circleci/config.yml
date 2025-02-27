@@ -19,6 +19,9 @@ jobs:
       - setup_remote_docker
       - run: docker container ls 
       - run: docker network ls
+      - run: docker network inspect host
+      - run: docker network inspect bridge
+      - run: docker network inspect ZZZMT9W2O3H
       - run: docker exec localhost:3306 ls /
 
 workflows:
