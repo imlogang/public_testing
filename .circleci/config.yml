@@ -19,9 +19,13 @@ jobs:
       - setup_remote_docker
       - run: docker container ls 
       - run: docker network ls
-      - run: docker network inspect host
-      - run: docker network inspect bridge
-      - run: docker network inspect ZZZMT9W2O3H
+      - run:
+          name: docker inspect
+          command: |
+            for NETWORK_ID in $(docker network ls --filter "driver=bridge" --format "{{.ID}}"); do
+                echo "Inspecting network ID: $NETWORK_ID"
+                docker network inspect $NETWORK_ID
+            done
       - run: docker exec localhost:3306 ls /
 
 workflows:
