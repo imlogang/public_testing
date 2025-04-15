@@ -15,7 +15,3 @@ jobs:
     steps:
       - checkout
       - run: echo $bar
-
-
-
-
