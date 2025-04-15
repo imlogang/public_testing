@@ -14,4 +14,3 @@ jobs:
     resource_class: logan/container-runner
     steps:
       - checkout
-      - run: echo $bar
